@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+p{
+    font-family:'Roboto','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.space{
+    height: 50px;
+    width: 100%;
+    background-color:darkorange;
+}
+.mainContainerFooter{
+    height: 250px;
+    width: 100%;
+    border-top: 1.5px solid black;
+    border-bottom: 1.5px solid black;
+    background-color:darkorange;
+}
+.footerTitulo{
+    font-size: 1.25rem;
+    font-family:'Roboto','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight:bolder; 
+}
