@@ -5,12 +5,13 @@ import {useNavigate,Link} from 'react-router-dom'
 function Signup() {
     const [correo,setCorreo]=useState('');
     const [password,setPassword]=useState('');
-
+    const [nombre,setNombre]=useState('');
+    const [appelido,setApellido]=useState('');
     async function submit(e){
         e.preventDefault();
         try {
           await axios.post('http://localhost:3001/user/signup',{
-            correo,password
+            correo,password,nombre,appelido
           })
           .then(res=>{
             if(res.data==='user exist'){
@@ -25,11 +26,19 @@ function Signup() {
         }
     }
     return (
-      <div className='py-4'>
+      <div className='py-5' style={{padding:'300px'}}>
         <div className='container-xl d-flex justify-content-center'>
           <div className='signup-container d-flex flex-column justify-content-center'>
-            <h2>SIGN UP!</h2>
+            <h2 className="mb-3">SIGN UP!</h2>
             <form action='POST'>
+                <div className="mb-3">
+                    <label for="exampleInputEmail1" className="form-label">Nombres</label>
+                    <input type='email' className='form-control' aria-describedby="emailHelp" onChange={(e)=>{setNombre(e.target.value)}} placeholder='Nombres'/>
+                </div>
+                <div className="mb-3">
+                    <label for="exampleInputEmail1" className="form-label">Apellidos</label>
+                    <input type='email' className='form-control' aria-describedby="emailHelp" onChange={(e)=>{setApellido(e.target.value)}} placeholder='Apellidos'/>
+                </div>
                 <div className="mb-3">
                     <label for="exampleInputEmail1" className="form-label">Email address</label>
                     <input type='email' className='form-control' aria-describedby="emailHelp" onChange={(e)=>{setCorreo(e.target.value)}} placeholder='Correo Electronico'/>
@@ -51,7 +60,7 @@ function Signup() {
                 <button type="submit" onClick={submit} class="btn btn-primary">Submit</button>
             </form>
           </div>
-          <div className='img-signup ms-3' style={{height:'500px',width:'50%', background:'pink',borderRadius:'10px'}}>
+          <div className='img-signup ms-3' style={{height:'600px',width:'100%', background:'pink',borderRadius:'10px'}}>
             <div></div>
             {/* <img className='' src={} alt='signup' /> */}
           </div>
