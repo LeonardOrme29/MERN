@@ -15,7 +15,11 @@
     height: 200px;
     border-radius: 2%;
 }
-
+.pDesc{
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
 .pInfo{
     padding: 0.5rem;
     padding-top: 0;
@@ -23,7 +27,14 @@
 .pNombre{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 1.2rem;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
 }
 .pCost{
     align-self: self-end;
+}
+button{
+    border:none;
+    text-align: left;
 }

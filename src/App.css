@@ -13,6 +13,9 @@ a{
 p{
   margin:0;
 }
+button{
+  background-color: transparent;
+}
 /* 
       HEADER.JS ------------------------------------------------------------------------------------
 */
@@ -25,12 +28,12 @@ i[class~="bi-search"]{
   color:black;
 }
 i[class~="bi-cart"]{
-  font-size: 25px;
+  font-size: 27px;
   color:black;
 }
 i[class~="user"]{
   font-size: 40px;
-  color: darkorange;
+  color: black;
 }
 .nav{
   justify-content: space-between;
@@ -41,9 +44,60 @@ i[class~="user"]{
 .busqueda{
   margin-top: 3px;
 }
+.navItem{
+  margin: 0 1.1rem;
+}
+.navItemBotton{
+  border:none;
+}
+.searchBar{
+  border: none;
+  border-bottom: 1px solid rgb(44, 38, 38);
+  width: 30%;
+  margin-right:1rem;
+}
+.header{
+  background-color:#ffffff;
+}
 /* 
       HOME.JS ------------------------------------------------------------------------------------
 */
+.encabezadoProduct{
+  font-size: 1.8em;
+}
+.bannerAnimation{
+  height: 600px;
+  opacity: 0.4;
+}
+.css-selector {
+  background: linear-gradient(304deg, #e8a51d, #e3520f, #ab47ee);
+  background-size: 600% 600%;
+
+  -webkit-animation: AnimationName 42s ease infinite;
+  -moz-animation: AnimationName 42s ease infinite;
+  -o-animation: AnimationName 42s ease infinite;
+  animation: AnimationName 42s ease infinite;
+}
+@-webkit-keyframes AnimationName {
+  0%{background-position:0% 4%}
+  50%{background-position:100% 97%}
+  100%{background-position:0% 4%}
+}
+@-moz-keyframes AnimationName {
+  0%{background-position:0% 4%}
+  50%{background-position:100% 97%}
+  100%{background-position:0% 4%}
+}
+@-o-keyframes AnimationName {
+  0%{background-position:0% 4%}
+  50%{background-position:100% 97%}
+  100%{background-position:0% 4%}
+}
+@keyframes AnimationName {
+  0%{background-position:0% 4%}
+  50%{background-position:100% 97%}
+  100%{background-position:0% 4%}
+}
 img[class~="banner"]{
   width: 100%;
 }
@@ -69,6 +123,15 @@ i[class~="arrow"]{
   font-size: 30px;
   padding: 0 10px;
 }
+.items{
+  background-color: red;
+}
+.items-container{
+  display: 	grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  justify-items: center;
+}
+
 /* 
       PRODUCTO.JS -------------------------------------------------------------------------------------------------
 */

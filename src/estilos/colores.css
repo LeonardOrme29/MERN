@@ -1,0 +1,91 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300);
+* {
+  box-sizing: border-box;
+}
+.colorsBox{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 50% 50%;
+    justify-items: center;
+    width: 100%;
+    height: 100%;
+}
+.colorOption{
+    width: 100%;
+    height: 100%;
+}
+input[type="radio"] {
+  display: none;
+}
+input[type="radio"]:checked + label span {
+  transform: scale(1.25);
+
+}
+input[type="radio"]:checked + label .Natural {
+  border: 2px solid #711313;
+}
+input[type="radio"]:checked + label .Blanco {
+  border: 2px solid #000000;
+}
+input[type="radio"]:checked + label .Beige {
+  border: 2px solid #a8967b;
+}
+input[type="radio"]:checked + label .Dorado {
+  border: 2px solid #b2880d;
+}
+input[type="radio"]:checked + label .Rojo {
+  border: 2px solid #711313;
+}
+input[type="radio"]:checked + label .Gris {
+  border: 2px solid #484848;
+}
+input[type="radio"]:checked + label .Marron {
+  border: 2px solid #2b2121;
+}
+input[type="radio"]:checked + label .Negro {
+  border: 2px solid #6f6f6f;
+}
+
+label {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  margin-right: 10px;
+  cursor: pointer;
+}
+label:hover span {
+  transform: scale(1.25);
+}
+label span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.2s ease-in-out;
+    border-radius: 50%;
+  border:3px solid #ccc;
+}
+label span.Natural {
+  background: #db2828;
+}
+label span.Blanco {
+  background: #ffffff;
+}
+label span.Beige {
+  background: #E9CFA9;
+}
+label span.Dorado {
+  background: #EFB810;
+}
+label span.Rojo {
+  background: #F82929;
+}
+label span.Gris {
+  background: #5F5D5D;
+}
+label span.Marron {
+  background: #483838;
+}
+label span.Negro {
+  background: #000000;
+}
+

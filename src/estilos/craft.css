@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+p{
+    font-family: 'Roboto',Arial, Helvetica, sans-serif;
+}
+.container-xl{
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    
+}
+.craftContainer{
+    border-top: 0.3em solid black;
+    border-bottom: 0.3em solid black;
+}
+.firstContainer{
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    column-gap: 2rem;
+    border-bottom: 0.15em solid black;
+    /* padding:0 2em; 
+    width: 100%;*/
+    min-height: 50px;
+}
+.secondContainer p{
+    font-size: 1.4rem;
+}
+.secondContainer{
+    border-bottom: 0.15em solid black;
+    min-height: 350px;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    column-gap: 2rem;
+}
+.sizeBox input{
+    width: 6rem;
+}
+.colorsContainer{
+    height: 100%;
+    padding: 2em 0;
+}
+.standarSize{
+    display: grid;
+    height: 6rem;
+    min-width: 195px;
+    grid-template-columns: 50% 50%;
+}
+.btn-info{
+    width: 80%;
+    height: 2.5rem;
+}
+
+.frameColor{
+    width: 50%;
+    min-width: 20rem;
+}
+.frameSizeBox{
+    width: 40%;
+}
+.sizeContainer{
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    column-gap: 0.5rem;
+}
+.frameExtra{
+    position: relative;
+    width: 30%;
+    min-width: 260px;
+}
+.checkExtra label{
+    width:auto;
+    height: auto;
+}
+.checkExtra input{
+    width: 1.2rem;
+    height: 1.2rem;
+}
+.checkExtra .messagePop{
+    display: none;
+    position: relative;
+    left:82%;
+    top:50%;
+    
+}
+#popInfoAcrilico:hover .messagePop{
+    display:inline-block;
+    position: absolute;
+
+}
+
+/* IMAGEN Y PRECIOS */
+.imagen{
+    background-color: blue;
+    flex-grow: 1;
+    min-width: 293px;
+    min-height: 300px;
+    max-width: 400px;
+}
+.imgFrame{
+    width: 100%;
+    height: 400px;
+    background-color: red;
+}
+
+
+
+
+
+
+

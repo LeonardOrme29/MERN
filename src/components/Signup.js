@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import axios from 'axios'
 import {useNavigate,Link} from 'react-router-dom'
+import '../estilos/signup.css'
 
 function Signup() {
     const [correo,setCorreo]=useState('');
@@ -60,7 +61,7 @@ function Signup() {
                 <button type="submit" onClick={submit} class="btn btn-primary">Submit</button>
             </form>
           </div>
-          <div className='img-signup ms-3' style={{height:'600px',width:'100%', background:'pink',borderRadius:'10px'}}>
+          <div className='img-signup ms-3' style={{height:'600px',width:'70%', background:'pink',borderRadius:'10px'}}>
             <div></div>
             {/* <img className='' src={} alt='signup' /> */}
           </div>

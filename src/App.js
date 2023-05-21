@@ -10,6 +10,7 @@ import Colecciones from './pages/Colecciones';
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
 import Prueba from './pages/Prueba';
+import Craft from './pages/Craft.js';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path='coleccion' element={<Colecciones/>}/>
         <Route path='login' element={<Login/>}/>
         <Route path='signup' element={<Signup/>}/>
+        <Route path='craft' element={<Craft/>}/>
         <Route path='prueba' element={<Prueba/>}/>
         </Route>
       </Routes>

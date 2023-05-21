@@ -3,7 +3,8 @@ import '../estilos/productos.css'
 
 function Products (props){
   return (
-    <div className='pContainer d-flex flex-column'>
+    <button>
+      <div className='pContainer d-flex flex-column'>
         <div className='pContainerImg d-flex flex-row justify-content-center align-items-center'>
           <div className='prueba'></div>
         </div>
@@ -14,6 +15,7 @@ function Products (props){
           <p className='pTag'>{props.pTag}</p>
         </div>
     </div>
+    </button>
   )
 }
 
