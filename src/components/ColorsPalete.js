@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import '../estilos/colores.css';
+import { color } from '../features/colorFrame/colorFrameSlice';
 
 const colors = [
   { id: 'Natural', class: 'Natural' },
@@ -14,7 +16,13 @@ const colors = [
 
 function ColorSelector() {
   const [selectedColor, setSelectedColor] = useState(null);
-
+  const dispatch=useDispatch();
+  useEffect(() => {
+    dispatch(color({
+      color:selectedColor
+    }))
+  }, [selectedColor])
+  
   function handleColorChange(e) {
     setSelectedColor(e.target.value);
   }

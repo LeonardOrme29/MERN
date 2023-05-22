@@ -1,26 +1,61 @@
 import '../estilos/craft.css'
-import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
+import React,{useState,useEffect} from 'react'
 import Colors from '../components/ColorsPalete'
 import MensajeFlotante from '../components/MensajeFlotante';
+import {useDispatch} from 'react-redux'
+import { build } from '../features/buildFrame/bulidFrameSlice';
+import buildCuadro from '../components/build';
 
 
 function Craft() {
-  const [inputValue, setInputValue] = useState();
-  const [text, setText] = useState("0.00");
+  const dispatch=useDispatch();
+  const [price, setPrice] = useState("0.00");
+  const [typeFrame, setTypeFrame]=useState('None');
+  const [deepFrame, setDeepFrame]=useState('None');
+  const [widthFrame,setWidthFrame]=useState(0);
+  const [heightFrame,setHeightFrame]=useState(0);
+  const [checkBox1,setCheckBox1]=useState(false);
+  const [checkBox2,setCheckBox2]=useState(false);
+  const [checkBox3,setCheckBox3]=useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
   }
-  function handleInputChange(event) {
-    event.preventDefault()
-    setInputValue(event.target.value)
+  const handleChangeBox1=()=>{
+    setCheckBox1(!checkBox1)
   }
+  const handleChangeBox2=()=>{
+    setCheckBox2(!checkBox2)
+  }
+  const handleChangeBox3=()=>{
+    setCheckBox3(!checkBox3)
+  }
+  useEffect(() => {
+    dispatch(build({
+      tipoC:typeFrame,
+      profC:deepFrame,
+      alturaC:heightFrame,
+      anchoC:widthFrame,
+      paspartu:checkBox1,
+      acrilico:checkBox2,
+      colgar:checkBox3
+    }))
+    setPrice(buildCuadro(heightFrame,widthFrame,typeFrame))
+  }, [typeFrame,deepFrame,widthFrame,heightFrame,checkBox1,checkBox2,checkBox3])
+  
   const CambiarValores=(heigth,width)=> {
     const inputAlto=document.getElementById('alto')
     const inputAncho=document.getElementById('ancho')
     inputAlto.value=heigth;
     inputAncho.value=width;
+    setHeightFrame(heigth)
+    setWidthFrame(width)
   }
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
+  };
   return (
     <div>
         <div className='container-xl d-flex flex-row'>
@@ -29,24 +64,24 @@ function Craft() {
               <div className='firstContainer d-flex flex-row justify-content-between'>
                 <div className='frameType Box d-flex flex-row align-items-center'>
                   <p>Tipo de marco:</p>
-                    <select>
+                    <select onChange={(event)=>{setTypeFrame(event.target.value)}}>
                       <option disabled selected>Seleccionar</option>
-                      <option>Cuadro Plano</option>
-                      <option>Cuadro Box</option>
-                      <option>Doble Vidrio</option>
-                      <option>Doble Marco</option>
-                      <option>Canvas?</option>
+                      <option value='plano'>Cuadro Plano</option>
+                      <option value='box'>Cuadro Box</option>
+                      <option value='dVidrio'>Doble Vidrio</option>
+                      <option value='dMarco'>Doble Marco</option>
+                      <option value='canva'>Canvas?</option>
                     </select>
                 </div>
                 <div className='frameDepth Box d-flex flex-row align-items-center'>
                   <p>Profundidad del marco:</p>
-                    <select>
+                    <select onChange={(event)=>{setDeepFrame(event.target.value)}}>
                       <option disabled selected>Seleccionar</option>
-                      <option>2 cm</option>
-                      <option>2.5 cm</option>
-                      <option>3 cm</option>
-                      <option>4 cm</option>
-                      <option>4.5 cm</option>
+                      <option value='2'>2 cm</option>
+                      <option value='2.5'>2.5 cm</option>
+                      <option value='3'>3 cm</option>
+                      <option value='4'>4 cm</option>
+                      <option value='4.5'>4.5 cm</option>
                     </select>
                 </div>
               </div>
@@ -59,14 +94,14 @@ function Craft() {
                         <div className='d-flex flex-column'>
                           <p>Altura</p>
                           <div className='d-flex'>
-                            <input className='heigthFrame' id='alto' name='alto' type='number' step="any" min='0' max='300' required></input>
+                            <input className='heigthFrame' id='alto' name='alto' type='number' step="any" min='0' max='300' required onChange={(e)=>{setHeightFrame(parseFloat(e.target.value))}} onKeyDown={handleKeyDown}></input>
                             <p>cm</p>
                           </div>
                         </div>
                         <div className='d-flex flex-column'>
                           <p>Ancho</p>
                           <div className='d-flex'>
-                            <input className='widthFrame'  id='ancho' name='ancho' type='number' step="any" min='0' max='300' required></input>
+                            <input className='widthFrame'  id='ancho' name='ancho' type='number' step="any" min='0' max='300' required onChange={(e)=>{setWidthFrame(parseFloat(e.target.value))}} onKeyDown={handleKeyDown}></input>
                             <p>cm</p>
                           </div>
                         </div>
@@ -94,9 +129,9 @@ function Craft() {
               <div className='thirdContainer d-flex flex-row'>
                 <div className='frameExtra Box d-flex flex-column '>
                   <p>Adicionales</p>
-                  <div className='checkExtra d-flex align-items-center'><input type='checkbox'/><label>Paspartú</label></div>
+                  <div className='checkExtra d-flex align-items-center'><input type='checkbox' checked={checkBox1} onChange={handleChangeBox1}/><label>Paspartú</label></div>
                   <div className='checkExtra d-flex align-items-center'>
-                    <input type='checkbox'/>
+                    <input type='checkbox'checked={checkBox2} onChange={handleChangeBox2}/>
                     <label>Acrilico Transparente</label>
                     <i id='popInfoAcrilico' class="bi bi-info-circle">
                       <div className='messagePop'>
@@ -104,7 +139,7 @@ function Craft() {
                       </div>
                     </i>
                   </div>
-                  <div className='checkExtra d-flex align-items-center'><input type='checkbox'/><label>Listo para colgar</label></div>
+                  <div className='checkExtra d-flex align-items-center'><input type='checkbox'checked={checkBox3} onChange={handleChangeBox3}/><label>Listo para colgar</label></div>
                 </div>
                 <div className='frameDesc Box'>
                   <p>Descripcion del cuadro</p>
@@ -118,7 +153,7 @@ function Craft() {
               <div className='priceFrame'>
                 <div className='d-flex flex-row'>
                   <p style={{color:'white'}}>Precio:$</p>
-                  <p id='changePrice' style={{color:'white'}}>{text}</p>
+                  <p id='changePrice' style={{color:'white'}}>{price}</p>
                 </div>
               </div>
             </div>
