@@ -47,7 +47,6 @@ p{
     width: 80%;
     height: 2.5rem;
 }
-
 .frameColor{
     width: 50%;
     min-width: 20rem;
@@ -60,10 +59,14 @@ p{
     row-gap: 0.5rem;
     column-gap: 0.5rem;
 }
+/* Extra options */
 .frameExtra{
     position: relative;
-    width: 30%;
+    width: 100%;
     min-width: 260px;
+}
+.checkExtra{
+    width: 30%;
 }
 .checkExtra label{
     width:auto;
@@ -73,11 +76,12 @@ p{
     width: 1.2rem;
     height: 1.2rem;
 }
+/* MensajePop */
 .checkExtra .messagePop{
     display: none;
     position: relative;
-    left:82%;
-    top:50%;
+    left:25%;
+    top:70%;
     
 }
 #popInfoAcrilico:hover .messagePop{
@@ -86,6 +90,59 @@ p{
 
 }
 
+/* Paspartu component */
+.cuadrado{
+    height:10.5rem;
+    width:15rem;
+    background-color: green;
+    border: 0.5rem solid #000000 ;
+    /* margin: 3rem; */
+}
+.row1{
+    background-color: #fff;
+    height: 50%;
+    width: 100%;
+}
+.row2{
+    background-color: #fff;
+    height: 100%;
+    width: 50%;
+}
+.artePaspartu{
+    height:5rem;
+    width:20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+    font-size: 1.5rem;
+}
+.lineaRow1{
+    height: 100%;
+    width: 3px;
+    background-color: #0000ff;
+}
+.lineaRow2{
+    height: 3px;
+    width: 100%;
+    background-color: #ff0000;
+}
+.customizePaspartu input{
+    width: 5rem;
+    height: 2.5rem;
+}
+.inputPaspartuWidth input{
+    border-color:#0000ff;
+    background-color:#0000ff;
+}
+.inputPaspartuHeight input{
+    border-color:#ff0000;
+    background-color: #ff0000;
+}
+.paspartuBlank{
+    min-height: 40px;
+    width: 100%;
+}
 /* IMAGEN Y PRECIOS */
 .imagen{
     background-color: blue;

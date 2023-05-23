@@ -16,6 +16,10 @@ p{
 button{
   background-color: transparent;
 }
+label{
+  width: auto;
+  height: auto;
+}
 /* 
       HEADER.JS ------------------------------------------------------------------------------------
 */

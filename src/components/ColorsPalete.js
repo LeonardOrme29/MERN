@@ -1,7 +1,8 @@
+import styles from '../estilos/colores.module.css';
 import React, { useState,useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import '../estilos/colores.css';
 import { color } from '../features/colorFrame/colorFrameSlice';
+
 
 const colors = [
   { id: 'Natural', class: 'Natural' },
@@ -28,9 +29,9 @@ function ColorSelector() {
   }
 
   return (
-      <div className='colorsBox'>
+      <div className={styles.colorsBox}>
       {colors.map((color) => (
-        <div key={color.id} className="colorOption">
+        <div key={color.id} className={styles.colorOption}>
           <input
             type="radio"
             name="color"
@@ -40,7 +41,7 @@ function ColorSelector() {
             checked={selectedColor === color.id}
           />
           <label htmlFor={color.id}>
-            <span className={color.class}></span>
+            <span className={styles[color.class]}></span>
           </label>
           <p>{color.id}</p>
         </div>

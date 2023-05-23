@@ -47,18 +47,37 @@ class varilla{
     }
 }
 
+class paspartu{
+    constructor(largoP,anchoP,costoP){
+        this.anchoP=anchoP;
+        this.largoP=largoP;
+        this.costoP=costoP;
+    }
+    areaP(){
+        return this.anchoP*this.largoP;
+    }
+    costoCM2(){
+        return this.costoP/this.areaP();
+    }
+}
 class cuadroPlano{
-    constructor(largo,ancho,Liston,Vidrio,Nordex){
-        this.largo=largo;
-        this.ancho=ancho;
+    constructor(largoA,anchoA,Liston,Vidrio,Nordex,Paspartu,booleanPaspartu,largoP,anchoP,acrilico,gancho){
+        this.largoA=largoA;
+        this.anchoA=anchoA;
         this.Liston=Liston;
         this.Vidrio=Vidrio;
         this.Nordex=Nordex;
+        this.Paspartu=Paspartu;
+        this.booleanPaspartu=booleanPaspartu;
+        this.anchoP=anchoP;
+        this.largoP=largoP;
+        this.acrilico=acrilico;
+        this.gancho=gancho;
     }
     cantidadCM(){
         var cantidadM;
-    	cantidadM=(this.largo*2+this.ancho*2);
-    	return cantidadM;
+    	cantidadM=(this.largoA*2+this.anchoA*2);
+    	return cantidadM+6;
     }
     cantidadListon(){
         let largoListon,aux;
@@ -95,21 +114,37 @@ class cuadroPlano{
     }
     //VIDRIO
     areaVidrio(){
-        return this.largo*this.ancho;
+        return this.largoA*this.anchoA+4;
     }
     costoVidrio(){
         return this.areaVidrio()*this.Vidrio.costoCM2();
     }
     areaNordex(){
-        return this.largo*this.ancho;
+        return this.largoA*this.anchoA;
     }
     costoNordex(){
         return this.areaNordex()*this.Nordex.costoCM2();
+    }
+    paspartuCM2(){
+        if (this.booleanPaspartu && this.largoA!==0 && this.anchoA!==0) {
+            return (this.largoA+this.largoP)*(this.anchoA+this.anchoP)
+        }
+        return 0;
+    }
+    costoPaspartu(){
+        if (this.paspartuCM2()<this.Paspartu.areaP()/2) {
+            return this.paspartuCM2()*this.Paspartu.costoCM2();            
+        }else{
+            return this.paspartuCM2()*this.Paspartu.costoP; 
+        }
     }
     adiccionales(){
         return 2.12;
     }
     Total(){
+        if (this.booleanPaspartu) {
+            return this.costoListon()+this.costoNordex()+this.costoVidrio()+this.adiccionales()+this.costoPaspartu();
+        }
         return this.costoListon()+this.costoNordex()+this.costoVidrio()+this.adiccionales();
     }
     }
@@ -250,7 +285,7 @@ class cuadroDobleV{
     }
 }
 
-function buildCuadro(alto,ancho,tipoC){
+function buildCuadro(alto,ancho,tipoC,booleanPaspartu,largoP,anchoP,booleanAcrilico,booleanGancho){
     var altoCuadro=parseFloat(alto);
     var anchoCuadro=parseFloat(ancho);
     var listonCosto=12;
@@ -258,19 +293,20 @@ function buildCuadro(alto,ancho,tipoC){
     var liston1=new liston(listonLargo,listonCosto);
     var vidrio1=new vidrio(40,20,6.20);
     var nordex1=new nordex(244,122,32.90);
-    var varilla1=new varilla(320,3)
-    var cuadroplano=new cuadroPlano(altoCuadro,anchoCuadro,liston1,vidrio1,nordex1);
+    var varilla1=new varilla(320,3);
+    var paspartu1=new paspartu(80,100,12);
+    var cuadroplano=new cuadroPlano(alto,ancho,liston1,vidrio1,nordex1,paspartu1,booleanPaspartu,largoP,anchoP,booleanAcrilico,booleanGancho);
     var cuadrobox=new cuadroBox(altoCuadro,anchoCuadro,liston1,vidrio1,nordex1,varilla1);
     var cuadrodobleV=new cuadroDobleV(altoCuadro,anchoCuadro,liston1,vidrio1,varilla1);
-    var totalCuadro=0;
+    var totalCuadro;
     if (tipoC==='plano') {
-        totalCuadro=cuadroplano.Total()
+        totalCuadro=cuadroplano.costoPaspartu()
     }else if(tipoC==='box'){
         totalCuadro=cuadrobox.Total()
     }else if(tipoC==='dVidrio'){
         totalCuadro=cuadrodobleV.Total()
     }
-    return totalCuadro*2;
+    return totalCuadro;
     
 }
 export default buildCuadro;
