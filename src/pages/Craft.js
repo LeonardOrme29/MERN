@@ -10,9 +10,9 @@ import '../estilos/craft.css'
 
 function Craft() {
   const dispatch=useDispatch();
-  const [price, setPrice] = useState("0.00");
-  const [typeFrame, setTypeFrame]=useState('None');
-  const [deepFrame, setDeepFrame]=useState('None');
+  const [price, setPrice] = useState(0.00);
+  const [typeFrame, setTypeFrame]=useState('none');
+  const [deepFrame, setDeepFrame]=useState('none');
   const [widthFrame,setWidthFrame]=useState(0);
   const [heightFrame,setHeightFrame]=useState(0);
   const [checkBox1,setCheckBox1]=useState(false);
@@ -34,33 +34,24 @@ function Craft() {
     setCheckBox3(!checkBox3)
   }
   useEffect(() => {
-    if (checkBox1) {
-      dispatch(build({
-        tipoC:typeFrame,
-        profC:deepFrame,
-        alturaC:heightFrame,
-        anchoC:widthFrame,
-        paspartu:checkBox1,
-        alturaP:heightPaspartu,
-        anchoP:widthPaspartu,
-        acrilico:checkBox2,
-        colgar:checkBox3
-      }))
-    }else{
-      dispatch(build({
-        tipoC:typeFrame,
-        profC:deepFrame,
-        alturaC:heightFrame,
-        anchoC:widthFrame,
-        paspartu:checkBox1,
-        alturaP:0,
-        anchoP:0,
-        acrilico:checkBox2,
-        colgar:checkBox3
-      }))
+    if(!checkBox1){
+      setWidthPaspartu(0);
+      setHeightPaspartu(0);
     }
-    
-    setPrice(buildCuadro(heightFrame,widthFrame,typeFrame,checkBox1,heightPaspartu,widthPaspartu,checkBox2,checkBox3))
+    dispatch(build({
+      tipoC:typeFrame,
+      profC:deepFrame,
+      alturaC:heightFrame,
+      anchoC:widthFrame,
+      paspartu:checkBox1,
+      alturaP:heightPaspartu,
+      anchoP:widthPaspartu,
+      acrilico:checkBox2,
+      colgar:checkBox3
+    }))
+    if (typeFrame!=='none' && widthFrame!==0 && heightFrame!==0) {
+      setPrice(buildCuadro(heightFrame,widthFrame,typeFrame,checkBox1,heightPaspartu,widthPaspartu,checkBox2,checkBox3))
+    }
   }, [typeFrame,deepFrame,widthFrame,heightFrame,checkBox1,checkBox2,checkBox3,widthPaspartu,heightPaspartu])
   
   const CambiarValores=(heigth,width)=> {
@@ -150,9 +141,12 @@ function Craft() {
                 <div className='frameExtra Box d-flex flex-column '>
                   <p>Adicionales</p>
                   <div className='paspatuOption d-flex flex-row'>
-                    <div className='checkExtra d-flex'>
+                    { widthFrame>40 || heightFrame>60 ?(<div className='checkExtra d-flex'>
+                      <div className='d-flex align-items-center' style={{width:'auto',height:'24px'}}><input type='checkbox' disabled/><label>Paspartú</label></div>
+                    </div>):(
+                      <div className='checkExtra d-flex'>
                       <div className='d-flex align-items-center' style={{width:'auto',height:'24px'}}><input type='checkbox' checked={checkBox1} onChange={handleChangeBox1}/><label>Paspartú</label></div>
-                    </div>
+                    </div>)}
                     {
                       checkBox1!==true ?(<></>):(<div className='customizePaspartu d-flex '>
                       <div className='d-flex flex-column'>
@@ -174,12 +168,12 @@ function Craft() {
                             </div>
                         </div>
                         <div className='inputPaspartuWidth d-flex justify-content-center'>
-                          <input  type='number'min='0' max='20' onChange={(e)=>{setWidthPaspartu(e.target.value)}}/><label>cm</label>
+                          <input  type='number' min='0' max='20' onChange={(e)=>{setWidthPaspartu(e.target.value)}} onKeyDown={handleKeyDown}/><label>cm</label>
                         </div>
                       </div>
                       <div className='inputPaspartuHeight d-flex flex-column align-items-center'>
                           <div className='d-flex align-items-center' style={{height:'100%'}}>
-                            <input type='number'min='0' max='20' onChange={(e)=>{setHeightPaspartu(e.target.value)}}/><label>cm</label>
+                            <input type='number' min='0' max='20' onChange={(e)=>{setHeightPaspartu(e.target.value)}} onKeyDown={handleKeyDown}/><label>cm</label>
                           </div>
                           <div className='paspartuBlank'></div>
                       </div>
