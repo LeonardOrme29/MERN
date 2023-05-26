@@ -43,7 +43,7 @@ p{
     min-width: 195px;
     grid-template-columns: 50% 50%;
 }
-.btn-info{
+.standarSize .btn-info{
     width: 80%;
     height: 2.5rem;
 }
@@ -67,6 +67,7 @@ p{
 }
 .checkExtra{
     width: 30%;
+    min-width: 15rem;
 }
 .checkExtra label{
     width:auto;
@@ -91,6 +92,9 @@ p{
 }
 
 /* Paspartu component */
+.paspatuOption{
+    flex-wrap: wrap;
+}
 .cuadrado{
     height:10.5rem;
     width:15rem;
@@ -120,13 +124,24 @@ p{
 .lineaRow1{
     height: 100%;
     width: 3px;
+    
+}
+.lineaRow1.select{
     background-color: #0000ff;
 }
 .lineaRow2{
     height: 3px;
     width: 100%;
+}
+.lineaRow2.select{
     background-color: #ff0000;
 }
+.buttonsPaspartu{
+    width: 100%;
+    padding: 0.5rem 0;
+}
+
+
 .customizePaspartu input{
     width: 5rem;
     height: 2.5rem;

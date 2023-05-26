@@ -6,6 +6,7 @@ import {useDispatch} from 'react-redux'
 import { build } from '../features/buildFrame/bulidFrameSlice';
 import buildCuadro from '../components/build';
 import '../estilos/craft.css'
+import imgPrueba from '../images/imgPrueba.png'
 
 
 function Craft() {
@@ -19,8 +20,9 @@ function Craft() {
   const [checkBox2,setCheckBox2]=useState(false);
   const [checkBox3,setCheckBox3]=useState(false);
   // paspartu
-  const [widthPaspartu,setWidthPaspartu]=useState(0);
-  const [heightPaspartu,setHeightPaspartu]=useState(0);
+  const [tamPaspartu,setTamPaspartu]=useState(0);
+  //imgen
+  const [imgenC,setImagenC]=useState('none');
   const handleSubmit = (e) => {
     e.preventDefault();
   }
@@ -33,10 +35,10 @@ function Craft() {
   const handleChangeBox3=()=>{
     setCheckBox3(!checkBox3)
   }
+  //Hooks y guardado de estado de las caracteristicas
   useEffect(() => {
     if(!checkBox1){
-      setWidthPaspartu(0);
-      setHeightPaspartu(0);
+      setTamPaspartu(0);
     }
     dispatch(build({
       tipoC:typeFrame,
@@ -44,16 +46,15 @@ function Craft() {
       alturaC:heightFrame,
       anchoC:widthFrame,
       paspartu:checkBox1,
-      alturaP:heightPaspartu,
-      anchoP:widthPaspartu,
+      tamP:tamPaspartu,
       acrilico:checkBox2,
       colgar:checkBox3
     }))
     if (typeFrame!=='none' && widthFrame!==0 && heightFrame!==0) {
-      setPrice(buildCuadro(heightFrame,widthFrame,typeFrame,checkBox1,heightPaspartu,widthPaspartu,checkBox2,checkBox3))
+      setPrice(buildCuadro(heightFrame,widthFrame,typeFrame,checkBox1,tamPaspartu,tamPaspartu,checkBox2,checkBox3))
     }
-  }, [typeFrame,deepFrame,widthFrame,heightFrame,checkBox1,checkBox2,checkBox3,widthPaspartu,heightPaspartu])
-  
+  }, [typeFrame,deepFrame,widthFrame,heightFrame,checkBox1,checkBox2,checkBox3,tamPaspartu])
+  //Para los botones de los tamaños predeterminados
   const CambiarValores=(heigth,width)=> {
     const inputAlto=document.getElementById('alto')
     const inputAncho=document.getElementById('ancho')
@@ -62,11 +63,13 @@ function Craft() {
     setHeightFrame(heigth)
     setWidthFrame(width)
   }
+  //Al dar enter en un input no mande
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
     }
   };
+
   return (
     <div>
         <div className='container-xl d-flex flex-row'>
@@ -160,22 +163,21 @@ function Craft() {
                               </div>
                               <div className='artePaspartu'>ARTE</div>
                               <div className='row2 d-flex align-items-center'>
-                                <div className='lineaRow2'></div>
+                                <div className='lineaRow2 select'></div>
                               </div>
                             </div>
                             <div className='row1 d-flex justify-content-center'>
-                              <div className='lineaRow1'></div>
+                              <div className='lineaRow1 select'></div>
                             </div>
                         </div>
-                        <div className='inputPaspartuWidth d-flex justify-content-center'>
-                          <input  type='number' min='0' max='20' onChange={(e)=>{setWidthPaspartu(e.target.value)}} onKeyDown={handleKeyDown}/><label>cm</label>
+                        <div className='buttonsPaspartu d-flex justify-content-center'>
+                          <select onChange={(event)=>{setTamPaspartu(event.target.value)}}>
+                            <option disabled selected>Seleccionar</option>
+                            <option value={3}>3 cm</option>
+                            <option value={4}>4 cm</option>
+                            <option value={5}>5 cm</option>
+                          </select>
                         </div>
-                      </div>
-                      <div className='inputPaspartuHeight d-flex flex-column align-items-center'>
-                          <div className='d-flex align-items-center' style={{height:'100%'}}>
-                            <input type='number' min='0' max='20' onChange={(e)=>{setHeightPaspartu(e.target.value)}} onKeyDown={handleKeyDown}/><label>cm</label>
-                          </div>
-                          <div className='paspartuBlank'></div>
                       </div>
                     </div>)
                     }
@@ -196,6 +198,9 @@ function Craft() {
             </div>
             <div className='imagen col-4 d-flex flex-column align-items-center'>
               <div className='imgFrame'>
+                {
+                  typeFrame!='none'?(<img src={imgPrueba} alt='cuadro' style={{width:'400px'}}></img>):(<></>)
+                }
               </div>
               <div className='priceFrame'>
                 <div className='d-flex flex-row'>

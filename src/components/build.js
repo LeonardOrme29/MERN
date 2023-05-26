@@ -174,9 +174,10 @@ class cuadroBox{
         this.gancho=gancho;
     }
     cantidadCM(){
-        var cantidadM;
-        cantidadM=(this.largoA*2+this.anchoA*2);
-        return cantidadM;
+        if (this.largoA!==0 && this.anchoA!==0) {
+            return ((this.largoA+2)*2+(this.anchoA+2)*2);
+        }
+    	return 0;
     }
     cantidadListon(){
         let largoListon,aux;
@@ -247,8 +248,7 @@ class cuadroBox{
             }
         }else{
             return 0;
-        }
-        
+        } 
     }
     Total(){
         if (this.booleanPaspartu) {
@@ -257,20 +257,26 @@ class cuadroBox{
             return this.costoListon()+this.costoNordex()+this.costoVidrio()+this.adiccionales()+this.costoVarrilla();
         }
     }
-    }
-
+}
 class cuadroDobleV{
-    constructor(largo,ancho,Liston,Vidrio,Varilla){
-        this.largo=largo;
-        this.ancho=ancho;
+    constructor(largoA,anchoA,Liston,Vidrio,Varilla,Paspartu,booleanPaspartu,largoP,anchoP,acrilico,gancho){
+        this.largoA=largoA;
+        this.anchoA=anchoA;
         this.Liston=Liston;
         this.Vidrio=Vidrio;
-        this.Varilla=Varilla
-     }
+        this.Varilla=Varilla;
+        this.Paspartu=Paspartu;
+        this.booleanPaspartu=booleanPaspartu;
+        this.anchoP=anchoP;
+        this.largoP=largoP;
+        this.acrilico=acrilico;
+        this.gancho=gancho;
+    }
     cantidadCM(){
-    var cantidadM;
-    cantidadM=(this.largo*2+this.ancho*2);
-    return cantidadM;
+        if (this.largoA!==0 && this.anchoA!==0) {
+            return ((this.largoA+2)*2+(this.anchoA+2)*2);
+        }
+    	return 0;
     }
     cantidadListon(){
         let largoListon,aux;
@@ -278,7 +284,7 @@ class cuadroDobleV{
         largoListon=this.Liston.largo;
         let auxliston=largoListon;
         do{
-            aux=largoListon-(this.largo*2+this.ancho*2);
+            aux=largoListon-(this.largoA*2+this.anchoA*2);
             if (aux<0){
                 contador=contador+1;
                 largoListon=largoListon+auxliston;
@@ -292,7 +298,7 @@ class cuadroDobleV{
         let contador=1;
         largoListon=this.Liston.largo;
         do{
-            aux=largoListon-(this.largo*2+this.ancho*2);
+            aux=largoListon-(this.largoA*2+this.anchoA*2);
             if (aux<0){
                 contador=contador+1;
                 largoListon=largoListon+largoListon;
@@ -311,16 +317,147 @@ class cuadroDobleV{
     }
     //VIDRIO
     areaVidrio(){
-        return this.largo*this.ancho;
+        return this.largoA*this.anchoA;
     }
     costoVidrio(){
         return this.areaVidrio()*this.Vidrio.costoCM2();
     }
+    //PASPARTU
+    paspartuCM2(){
+        if (this.booleanPaspartu && this.largoP!==0 && this.anchoP!==0 && this.largoP!=='' && this.anchoP!=='') {
+            return (this.largoA+(this.largoP)*2)*(this.anchoA+(this.anchoP)*2)
+        }
+        return 0;
+    }
+    costoPaspartu(){
+        if (this.booleanPaspartu && this.largoP!==0 && this.anchoP!==0 && this.largoP!=='' && this.anchoP!=='') {
+            if (this.paspartuCM2()<this.Paspartu.areaP()/3) {
+                return this.Paspartu.costoP/3;            
+            }else{
+                return this.Paspartu.costoP; 
+            }
+        }else{
+            return 0;
+        } 
+    }
+
     adiccionales(){
         return 2.12;
     }
     Total(){
-        return this.costoListon()+2*(this.costoVidrio())+this.adiccionales()+this.costoVarrilla()*2;
+         if (this.booleanPaspartu) {
+            return this.costoListon()+2*(this.costoVidrio())+this.adiccionales()+this.costoVarrilla()*2+this.costoPaspartu();
+        }else{
+            return this.costoListon()+2*(this.costoVidrio())+this.adiccionales()+this.costoVarrilla()*2;
+        }
+    }
+}
+class cuadroDobleM{
+    constructor(largoA,anchoA,Liston,Liston2,Vidrio,Nordex,Varilla,Paspartu,booleanPaspartu,largoP,anchoP,acrilico,gancho){
+        this.largoA=largoA;
+        this.anchoA=anchoA;
+        this.Liston=Liston;
+        this.Liston2=Liston2;
+        this.Vidrio=Vidrio;
+        this.Nordex=Nordex;
+        this.Varilla=Varilla;
+        this.Paspartu=Paspartu;
+        this.booleanPaspartu=booleanPaspartu;
+        this.anchoP=anchoP;
+        this.largoP=largoP;
+        this.acrilico=acrilico;
+        this.gancho=gancho;
+    }
+    cantidadCM(){
+        if (this.largoA!==0 && this.anchoA!==0) {
+            return ((this.largoA+2)*2+(this.anchoA+2)*2);
+        }
+    	return 0;
+    }
+    cantidadListon(){
+        let largoListon,aux;
+        let contador=1;
+        largoListon=this.Liston.largo;
+        let auxliston=largoListon;
+        do{
+            aux=largoListon-(this.largoA*2+this.anchoA*2);
+            if (aux<0){
+                contador=contador+1;
+                largoListon=largoListon+auxliston;
+            }
+        }
+        while(aux<0);
+        return contador;
+    }
+    restanteListon(){
+        let largoListon,aux,restante;
+        let contador=1;
+        largoListon=this.Liston.largo;
+        do{
+            aux=largoListon-(this.largoA*2+this.anchoA*2);
+            if (aux<0){
+                contador=contador+1;
+                largoListon=largoListon+largoListon;
+            }
+            restante=aux;
+        }
+        while(aux<0);
+        return restante;
+    }
+    costoListon(){
+        return this.cantidadCM()*this.Liston.costoCM2();
+    }
+    segundoListonCM(){
+        return this.cantidadCM+4; //1 cm a cada lado, teniendo en cuenta q el borde del cuadro es de 2cm
+    }
+    //Otro listion
+    segundoListonCosto(){
+        return this.segundoListonCM()*this.Liston2.costoCM2();
+    }
+    //Varilla
+    costoVarrilla(){
+        return this.cantidadCM()*this.Varilla.costoCM2();
+    }
+    //VIDRIO
+    areaVidrio(){
+        return this.largoA*this.anchoA;
+    }
+    costoVidrio(){
+        return this.areaVidrio()*this.Vidrio.costoCM2();
+    }
+    areaNordex(){
+        return this.largoA*this.anchoA;
+    }
+    costoNordex(){
+        return this.areaNordex()*this.Nordex.costoCM2();
+    }
+    adiccionales(){
+        return 2.12;
+    }
+    //Paspartu
+    paspartuCM2(){
+        if (this.booleanPaspartu && this.largoP!==0 && this.anchoP!==0 && this.largoP!=='' && this.anchoP!=='') {
+            return (this.largoA+(this.largoP)*2)*(this.anchoA+(this.anchoP)*2)
+        }
+        return 0;
+    }
+    costoPaspartu(){
+        if (this.booleanPaspartu && this.largoP!==0 && this.anchoP!==0 && this.largoP!=='' && this.anchoP!=='') {
+            if (this.paspartuCM2()<this.Paspartu.areaP()/3) {
+                return this.Paspartu.costoP/3;            
+            }else{
+                return this.Paspartu.costoP; 
+            }
+        }else{
+            return 0;
+        } 
+    }
+    Total(){
+        if (this.booleanPaspartu) {
+            return this.costoListon()+this.costoNordex()+this.costoVidrio()+this.adiccionales()+this.costoVarrilla()+this.costoPaspartu()+this.segundoListonCosto();
+        }else{
+            return this.costoListon()+this.costoNordex()+this.costoVidrio()+this.adiccionales()+this.costoVarrilla()+this.segundoListonCosto();
+        }
     }
 }
 
@@ -336,7 +473,9 @@ function buildCuadro(alto,ancho,tipoC,booleanPaspartu,largoP,anchoP,booleanAcril
     var paspartu1=new paspartu(70,50,8);
     var cuadroplano=new cuadroPlano(altoCuadro,anchoCuadro,liston1,vidrio1,nordex1,paspartu1,booleanPaspartu,largoP,anchoP,booleanAcrilico,booleanGancho);
     var cuadrobox=new cuadroBox(altoCuadro,anchoCuadro,liston1,vidrio1,nordex1,varilla1,paspartu1,booleanPaspartu,largoP,anchoP,booleanAcrilico,booleanGancho);
-    var cuadrodobleV=new cuadroDobleV(altoCuadro,anchoCuadro,liston1,vidrio1,varilla1);
+    var cuadrodobleV=new cuadroDobleV(altoCuadro,anchoCuadro,liston1,vidrio1,varilla1,paspartu1,booleanPaspartu,largoP,anchoP,booleanAcrilico,booleanGancho);
+    //var cuadrodobleM=new cuadroDobleM(altoCuadro,anchoCuadro,liston1,liston2,vidrio1,varilla1,paspartu1,booleanPaspartu,largoP,anchoP,booleanAcrilico,booleanGancho);
+
     var totalCuadro;
     if (tipoC==='plano') {
         totalCuadro=cuadroplano.Total();
